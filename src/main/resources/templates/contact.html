@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contact PowerFit Gym - Get in touch with us for membership inquiries, questions, or to schedule a tour.">
+  <title>Contact Us | PowerFit Gym</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div class="navbar">
+  <h1>PowerFit Gym</h1>
+  <div>
+    <a th:href="@{/}">Home</a>
+    <a th:href="@{/about}">About</a>
+    <a th:href="@{/plans}">Plans</a>
+    <a th:href="@{/contact}">Contact</a>
+  </div>
+</div>
+
+<section class="hero" style="min-height:40vh">
+  <h2>Get In <span>Touch</span></h2>
+  <p style="max-width: 600px; margin: 0 auto;">Have questions? We're here to help! Reach out to us anytime.</p>
+</section>
+
+<section class="contact-section">
+  <div class="container">
+    <div class="contact-grid">
+      <!-- Contact Form -->
+      <div class="contact-form-container">
+        <h3>Send Us a Message</h3>
+        <div th:if="${success}" class="alert-message alert-success" th:text="${success}"></div>
+        <form class="contact-form" th:action="@{/contact}" method="post">
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" placeholder="Your Name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567">
+          </div>
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <select id="subject" name="subject" required>
+              <option value="">Select a subject</option>
+              <option value="membership">Membership Inquiry</option>
+              <option value="tour">Schedule a Tour</option>
+              <option value="training">Personal Training</option>
+              <option value="classes">Group Classes</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" placeholder="Tell us how we can help you..." required></textarea>
+          </div>
+          <button type="submit" class="btn">Send Message</button>
+        </form>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="contact-info">
+        <h3>Contact Information</h3>
+        
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div>
+            <h4>Address</h4>
+            <p>123 Fitness Street<br>Health City, HC 12345<br>United States</p>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div>
+            <h4>Phone</h4>
+            <p>+1 (555) 123-4567</p>
+            <p style="font-size: 0.9rem; opacity: 0.8;">Available 24/7</p>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon">📧</div>
+          <div>
+            <h4>Email</h4>
+            <p>support@powerfitgym.com</p>
+            <p>info@powerfitgym.com</p>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon">🕐</div>
+          <div>
+            <h4>Hours</h4>
+            <p><strong>24/7 Access</strong> for members</p>
+            <p>Office Hours: Mon-Fri 9AM-6PM</p>
+            <p>Weekend Support: 10AM-4PM</p>
+          </div>
+        </div>
+
+        <div class="social-links" style="margin-top: 2rem;">
+          <h4 style="margin-bottom: 1rem;">Follow Us</h4>
+          <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
+            <a href="#" class="social-link" aria-label="Facebook" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; background: rgba(255,255,255,0.1); border-radius: 5px; font-size: 0.9rem; white-space: nowrap;">
+              📘 Facebook
+            </a>
+            <a href="#" class="social-link" aria-label="Instagram" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; background: rgba(255,255,255,0.1); border-radius: 5px; font-size: 0.9rem; white-space: nowrap;">
+              📷 Instagram
+            </a>
+            <a href="#" class="social-link" aria-label="Twitter" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; background: rgba(255,255,255,0.1); border-radius: 5px; font-size: 0.9rem; white-space: nowrap;">
+              🐦 Twitter
+            </a>
+            <a href="#" class="social-link" aria-label="YouTube" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; background: rgba(255,255,255,0.1); border-radius: 5px; font-size: 0.9rem; white-space: nowrap;">
+              📺 YouTube
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Map Section -->
+    <div class="map-section">
+      <h3>Find Us</h3>
+      <div class="map-placeholder">
+        <p>📍 123 Fitness Street, Health City, HC 12345</p>
+        <p style="margin-top: 1rem; opacity: 0.8;">Visit us at our location or schedule a virtual tour!</p>
+        <a th:href="@{/join}" class="btn" style="margin-top: 1.5rem; max-width: 300px;">Schedule a Tour</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>PowerFit Gym</h3>
+            <p>Transforming lives through fitness, one workout at a time.</p>
+            <div class="social-links">
+                <a href="#" aria-label="Facebook">📘</a>
+                <a href="#" aria-label="Instagram">📷</a>
+                <a href="#" aria-label="Twitter">🐦</a>
+                <a href="#" aria-label="YouTube">📺</a>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a th:href="@{/}">Home</a></li>
+                <li><a th:href="@{/about}">About Us</a></li>
+                <li><a th:href="@{/plans}">Membership Plans</a></li>
+                <li><a th:href="@{/contact}">Contact</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Contact Info</h4>
+            <ul>
+                <li>📍 123 Fitness Street, Health City</li>
+                <li>📞 +1 (555) 123-4567</li>
+                <li>📧 support@powerfitgym.com</li>
+                <li>🕐 Open 24/7</li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Membership</h4>
+            <ul>
+                <li><a th:href="@{/join}">Join Now</a></li>
+                <li><a th:href="@{/plans}">View Plans</a></li>
+                <li><a th:href="@{/contact}">FAQ</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2025 PowerFit Gym. All Rights Reserved. | <a href="#" style="color: rgba(255,255,255,0.7);">Privacy Policy</a> | <a href="#" style="color: rgba(255,255,255,0.7);">Terms of Service</a></p>
+    </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joined Successfully</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div class="navbar">
+    <h1>PowerFit Gym</h1>
+    <div>
+        <a th:href="@{/}">Home</a>
+    </div>
+</div>
+
+<div class="hero">
+    <h2>🎉 Payment Successful!</h2>
+    <p>Welcome to PowerFit Gym! We're excited to have you on board.</p>
+    <div th:if="${success}" style="background: rgba(68,255,68,0.2); padding: 1rem; border-radius: 10px; margin: 1rem 0; border: 1px solid rgba(68,255,68,0.5);">
+        <p style="color: #44ff44; font-weight: 600;" th:text="${success}"></p>
+    </div>
+    <p style="font-size: 1rem; margin-top: 1rem;">Your membership is now active! You can start using the gym facilities immediately.</p>
+    <div style="margin-top: 2rem;">
+        <a th:href="@{/}" class="btn">Go Home</a>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>PowerFit Gym</h3>
+            <p>Transforming lives through fitness, one workout at a time.</p>
+            <div class="social-links">
+                <a href="#" aria-label="Facebook">📘</a>
+                <a href="#" aria-label="Instagram">📷</a>
+                <a href="#" aria-label="Twitter">🐦</a>
+                <a href="#" aria-label="YouTube">📺</a>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a th:href="@{/}">Home</a></li>
+                <li><a th:href="@{/about}">About Us</a></li>
+                <li><a th:href="@{/plans}">Membership Plans</a></li>
+                <li><a th:href="@{/contact}">Contact</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Contact Info</h4>
+            <ul>
+                <li>📍 123 Fitness Street, Health City</li>
+                <li>📞 +1 (555) 123-4567</li>
+                <li>📧 support@powerfitgym.com</li>
+                <li>🕐 Open 24/7</li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Membership</h4>
+            <ul>
+                <li><a th:href="@{/join}">Join Now</a></li>
+                <li><a th:href="@{/plans}">View Plans</a></li>
+                <li><a th:href="@{/contact}">FAQ</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2025 PowerFit Gym. All Rights Reserved. | <a href="#" style="color: rgba(255,255,255,0.7);">Privacy Policy</a> | <a href="#" style="color: rgba(255,255,255,0.7);">Terms of Service</a></p>
+    </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment | PowerFit Gym</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div class="navbar">
+    <h1>PowerFit Gym</h1>
+    <div>
+        <a th:href="@{/}">Home</a>
+        <a th:href="@{/plans}">Plans</a>
+    </div>
+</div>
+
+<section class="hero" style="min-height:80vh">
+    <h2>Complete Your <span>Payment</span></h2>
+    <p style="margin-bottom: 2rem;">Complete your membership payment to activate your account.</p>
+
+    <div style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 2rem; border-radius: 15px; max-width: 600px; margin: 0 auto;">
+        <div style="margin-bottom: 2rem;">
+            <h3 style="color: var(--red); margin-bottom: 1rem;">Membership Details</h3>
+            <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 10px; margin-bottom: 1rem;">
+                <p><strong>Name:</strong> <span th:text="${member.name}"></span></p>
+                <p><strong>Email:</strong> <span th:text="${member.email}"></span></p>
+                <p><strong>Plan:</strong> <span th:text="${member.plan}"></span></p>
+                <p><strong>Batch:</strong> <span th:text="${member.batch}"></span></p>
+            </div>
+            <div style="background: rgba(230,57,70,0.2); padding: 1.5rem; border-radius: 10px; border: 2px solid var(--red);">
+                <p style="font-size: 1.2rem; margin-bottom: 0.5rem;"><strong>Total Amount:</strong></p>
+                <p style="font-size: 2rem; color: var(--red); font-weight: 700;">$<span th:text="${amount}">0</span></p>
+            </div>
+        </div>
+
+        <form th:action="@{/payment/process}" method="post">
+            <input type="hidden" name="memberId" th:value="${member.id}">
+            <input type="hidden" name="amount" th:value="${amount}">
+
+            <div class="form-group">
+                <label for="paymentMethod">Payment Method *</label>
+                <select id="paymentMethod" name="paymentMethod" required>
+                    <option value="">Select payment method</option>
+                    <option value="Cash">Cash</option>
+                    <option value="Card">Debit/Credit Card</option>
+                    <option value="Online">Online Payment</option>
+                    <option value="Bank Transfer">Bank Transfer</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="transactionId">Transaction ID (Optional)</label>
+                <input type="text" id="transactionId" name="transactionId" placeholder="Enter transaction ID if applicable">
+                <small>Leave blank if paying by cash</small>
+            </div>
+
+            <button type="submit" class="btn btn-large">Complete Payment</button>
+        </form>
+
+        <p style="margin-top: 1.5rem; font-size: 0.9rem; opacity: 0.8; text-align: center;">
+            Your membership will be activated immediately after payment confirmation.
+        </p>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>PowerFit Gym</h3>
+            <p>Transforming lives through fitness, one workout at a time.</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2025 PowerFit Gym. All Rights Reserved.</p>
+    </div>
+</footer>
+
+</body>
+</html>
+
+

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Members</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        .search-box {
+            width: 100%;
+            max-width: 500px;
+            margin: 2rem auto;
+            display: flex;
+            gap: 0.5rem;
+        }
+        .search-box input {
+            flex: 1;
+            margin-bottom: 0;
+        }
+        .search-box button {
+            width: auto;
+            padding: 0.75rem 1.5rem;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .btn-small {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+            width: auto;
+        }
+        .btn-edit { background: linear-gradient(135deg, #4a90e2, #357abd); }
+        .btn-delete { background: linear-gradient(135deg, #e63946, #c1121f); }
+        .btn-toggle { background: linear-gradient(135deg, #ffaa44, #ff8800); }
+        .btn-renew { background: linear-gradient(135deg, #44ff44, #00cc00); }
+        .alert-message {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .alert-success {
+            background: rgba(68,255,68,0.2);
+            border: 1px solid rgba(68,255,68,0.5);
+            color: #44ff44;
+        }
+        .alert-error {
+            background: rgba(255,68,68,0.2);
+            border: 1px solid rgba(255,68,68,0.5);
+            color: #ff4444;
+        }
+        .expired-badge {
+            color: #ffaa44;
+            font-weight: 600;
+        }
+        .expiring-soon {
+            color: #ffaa44;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <h1>PowerFit Gym - Admin</h1>
+    <div style="display: flex; align-items: center; gap: 2rem;">
+        <div style="display: flex; flex-direction: column; align-items: flex-end;">
+            <span style="color: rgba(255,255,255,0.9); font-size: 0.9rem;">Welcome, <strong style="color: var(--red);">Admin</strong></span>
+            <span style="color: rgba(255,255,255,0.7); font-size: 0.85rem;" th:text="${#temporals.format(today, 'EEEE, MMMM dd, yyyy')}">Date</span>
+        </div>
+        <div>
+            <a th:href="@{/admin/dashboard}">Dashboard</a>
+            <a th:href="@{/admin/members}">Members</a>
+            <a th:href="@{/logout}">Logout</a>
+        </div>
+    </div>
+</div>
+
+<section class="hero" style="min-height: 80vh;">
+    <h2>All <span>Members</span></h2>
+
+    <!-- Success/Error Messages -->
+    <div th:if="${success}" class="alert-message alert-success" th:text="${success}"></div>
+    <div th:if="${error}" class="alert-message alert-error" th:text="${error}"></div>
+
+    <!-- Search and Filter Box -->
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin: 2rem auto; max-width: 800px;">
+        <form th:action="@{/admin/members}" method="get" class="search-box" style="flex: 1; min-width: 300px;">
+            <input type="text" name="search" th:value="${search}" placeholder="Search by name, email, phone, or batch..." style="margin-bottom: 0;">
+            <button type="submit" class="btn btn-small">Search</button>
+        </form>
+        <form th:action="@{/admin/members}" method="get" style="display: flex; gap: 0.5rem;">
+            <select name="batch" style="padding: 0.75rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: white;">
+                <option value="">All Batches</option>
+                <option value="Morning (6AM-10AM)" th:selected="${batch == 'Morning (6AM-10AM)'}">Morning (6AM-10AM)</option>
+                <option value="Afternoon (10AM-2PM)" th:selected="${batch == 'Afternoon (10AM-2PM)'}">Afternoon (10AM-2PM)</option>
+                <option value="Evening (2PM-6PM)" th:selected="${batch == 'Evening (2PM-6PM)'}">Evening (2PM-6PM)</option>
+                <option value="Night (6PM-10PM)" th:selected="${batch == 'Night (6PM-10PM)'}">Night (6PM-10PM)</option>
+            </select>
+            <button type="submit" class="btn btn-small">Filter</button>
+            <a th:href="@{/admin/members}" class="btn btn-small" style="background: rgba(255,255,255,0.2);">Clear</a>
+        </form>
+    </div>
+
+    <div style="width: 100%; max-width: 1400px; overflow-x: auto; margin-top: 2rem;">
+        <table style="width: 100%; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 15px; border-collapse: collapse; overflow: hidden;">
+            <thead>
+                <tr style="background: rgba(230,57,70,0.3);">
+                    <th style="padding: 1rem; text-align: left; border-bottom: 2px solid rgba(255,255,255,0.2);">ID</th>
+                    <th style="padding: 1rem; text-align: left; border-bottom: 2px solid rgba(255,255,255,0.2);">Name</th>
+                    <th style="padding: 1rem; text-align: left; border-bottom: 2px solid rgba(255,255,255,0.2);">Phone</th>
+                    <th style="padding: 1rem; text-align: left; border-bottom: 2px solid rgba(255,255,255,0.2);">Email</th>
+                    <th style="padding: 1rem; text-align: left; border-bottom: 2px solid rgba(255,255,255,0.2);">Plan</th>
+                    <th style="padding: 1rem; text-align: left; border-bottom: 2px solid rgba(255,255,255,0.2);">Batch</th>
+                    <th style="padding: 1rem; text-align: left; border-bottom: 2px solid rgba(255,255,255,0.2);">Join Date</th>
+                    <th style="padding: 1rem; text-align: left; border-bottom: 2px solid rgba(255,255,255,0.2);">Expiry Date</th>
+                    <th style="padding: 1rem; text-align: left; border-bottom: 2px solid rgba(255,255,255,0.2);">Payment</th>
+                    <th style="padding: 1rem; text-align: left; border-bottom: 2px solid rgba(255,255,255,0.2);">Status</th>
+                    <th style="padding: 1rem; text-align: center; border-bottom: 2px solid rgba(255,255,255,0.2);">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="member : ${members}" style="border-bottom: 1px solid rgba(255,255,255,0.1); transition: background 0.3s;" 
+                    th:classappend="${member.expiryDate != null and member.expiryDate.isBefore(T(java.time.LocalDate).now().plusDays(7)) and member.expiryDate.isAfter(T(java.time.LocalDate).now())} ? 'expiring-row' : ''"
+                    onmouseover="this.style.background='rgba(255,255,255,0.15)'" 
+                    onmouseout="this.style.background='transparent'">
+                    <td style="padding: 1rem;" th:text="${member.id}"></td>
+                    <td style="padding: 1rem;" th:text="${member.name}"></td>
+                    <td style="padding: 1rem;" th:text="${member.phone}"></td>
+                    <td style="padding: 1rem;" th:text="${member.email}"></td>
+                    <td style="padding: 1rem;" th:text="${member.plan}"></td>
+                    <td style="padding: 1rem;" th:text="${member.batch != null ? member.batch : 'N/A'}"></td>
+                    <td style="padding: 1rem;" th:text="${member.joinDate != null ? #temporals.format(member.joinDate, 'MMM dd, yyyy') : 'N/A'}"></td>
+                    <td style="padding: 1rem;">
+                        <span th:if="${member.expiryDate != null}">
+                            <span th:text="${#temporals.format(member.expiryDate, 'MMM dd, yyyy')}"></span>
+                            <span th:if="${member.expiryDate.isBefore(T(java.time.LocalDate).now())}" class="expired-badge"> (Expired)</span>
+                            <span th:if="${member.expiryDate.isAfter(T(java.time.LocalDate).now()) and member.expiryDate.isBefore(T(java.time.LocalDate).now().plusDays(7))}" class="expiring-soon"> (Expiring Soon)</span>
+                        </span>
+                        <span th:unless="${member.expiryDate != null}">N/A</span>
+                    </td>
+                    <td style="padding: 1rem;">
+                        <span th:if="${member.paymentStatus == 'Paid'}" style="color: #44ff44; font-weight: 600;">Paid</span>
+                        <span th:if="${member.paymentStatus == 'Pending'}" style="color: #ffaa44; font-weight: 600;">Pending</span>
+                        <span th:if="${member.paymentStatus == 'Overdue'}" style="color: #ff4444; font-weight: 600;">Overdue</span>
+                        <span th:unless="${member.paymentStatus != null}" style="color: #ffaa44; font-weight: 600;">Pending</span>
+                    </td>
+                    <td style="padding: 1rem;">
+                        <span th:if="${member.active}" style="color: #44ff44; font-weight: 600;">Active</span>
+                        <span th:unless="${member.active}" style="color: #ffaa44; font-weight: 600;">Inactive</span>
+                    </td>
+                    <td style="padding: 1rem;">
+                        <div class="action-buttons">
+                            <a th:href="@{/admin/members/edit/{id}(id=${member.id})}" class="btn btn-small btn-edit">Edit</a>
+                            <form th:action="@{/admin/members/toggle-status/{id}(id=${member.id})}" method="post" style="display: inline;">
+                                <button type="submit" class="btn btn-small btn-toggle" 
+                                        th:text="${member.active ? 'Deactivate' : 'Activate'}"></button>
+                            </form>
+                            <form th:action="@{/admin/members/renew/{id}(id=${member.id})}" method="post" style="display: inline;">
+                                <select name="plan" required style="padding: 0.4rem; margin-right: 0.5rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 5px; color: white;">
+                                    <option value="Monthly">Monthly</option>
+                                    <option value="Quarterly">Quarterly</option>
+                                    <option value="Yearly">Yearly</option>
+                                </select>
+                                <button type="submit" class="btn btn-small btn-renew">Renew</button>
+                            </form>
+                            <form th:action="@{/admin/members/delete/{id}(id=${member.id})}" method="post" style="display: inline;" 
+                                  onsubmit="return confirm('Are you sure you want to delete this member? This action cannot be undone.');">
+                                <button type="submit" class="btn btn-small btn-delete">Delete</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(members)}">
+                    <td colspan="11" style="padding: 2rem; text-align: center; color: rgba(255,255,255,0.7);">
+                        <span th:if="${search != null and !search.isEmpty()}">No members found matching your search.</span>
+                        <span th:if="${batch != null and !batch.isEmpty()}">No members found in this batch.</span>
+                        <span th:unless="${(search != null and !search.isEmpty()) or (batch != null and !batch.isEmpty())}">No members found. Be the first to join!</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <a class="btn" th:href="@{/admin/dashboard}" style="max-width: 200px;">Back to Dashboard</a>
+    </div>
+</section>
+
+<div class="footer">© 2025 PowerFit Gym | Admin Panel</div>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Members List</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div class="hero">
+    <h2>👥 Joined Members</h2>
+
+    <table border="1" style="background:white; color:black;">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Plan</th>
+        </tr>
+
+        <tr th:each="m : ${members}">
+            <td th:text="${m.id}"></td>
+            <td th:text="${m.name}"></td>
+            <td th:text="${m.phone}"></td>
+            <td th:text="${m.email}"></td>
+            <td th:text="${m.plan}"></td>
+        </tr>
+    </table>
+
+    <br>
+    <a href="/" class="btn">Back to Home</a>
+</div>
+
+</body>
+</html>

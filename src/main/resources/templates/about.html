@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Learn about PowerFit Gym - Our mission, facilities, trainers, and commitment to your fitness journey.">
+  <title>About Us | PowerFit Gym</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div class="navbar">
+  <h1>PowerFit Gym</h1>
+  <div>
+    <a th:href="@{/}">Home</a>
+    <a th:href="@{/about}">About</a>
+    <a th:href="@{/plans}">Plans</a>
+    <a th:href="@{/contact}">Contact</a>
+  </div>
+</div>
+
+<section class="hero" style="min-height:50vh">
+  <h2>About <span>PowerFit Gym</span></h2>
+  <p style="max-width: 800px; margin: 0 auto;">We're more than just a gym. We're a community dedicated to helping you achieve your fitness goals.</p>
+</section>
+
+<section class="about-content">
+  <div class="container">
+    <div class="about-section">
+      <h2>Our <span>Mission</span></h2>
+      <p>At PowerFit Gym, our mission is to empower individuals to transform their lives through fitness. We believe that everyone deserves access to world-class facilities, expert guidance, and a supportive community that motivates and inspires.</p>
+      <p>Since 2010, we've been committed to providing an exceptional fitness experience that combines cutting-edge equipment, certified trainers, and innovative programs designed to help you reach your full potential.</p>
+    </div>
+
+    <div class="about-section">
+      <h2>Our <span>Facilities</span></h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🏋️</div>
+          <h3>Cardio Zone</h3>
+          <p>State-of-the-art treadmills, ellipticals, bikes, and rowing machines with built-in entertainment systems.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">💪</div>
+          <h3>Strength Training</h3>
+          <p>Comprehensive free weights area with Olympic platforms, power racks, and Hammer Strength equipment.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🧘</div>
+          <h3>Group Fitness</h3>
+          <p>Spacious studios for yoga, Pilates, HIIT, spinning, and dance classes with professional sound systems.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🏊</div>
+          <h3>Recovery Zone</h3>
+          <p>Sauna, steam room, and massage therapy services to help you recover and relax after workouts.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🥗</div>
+          <h3>Nutrition Bar</h3>
+          <p>Healthy snacks, protein shakes, and nutritional supplements to fuel your fitness journey.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🚿</div>
+          <h3>Locker Rooms</h3>
+          <p>Spacious, clean locker rooms with private showers, towel service, and premium amenities.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-section">
+      <h2>Our <span>Team</span></h2>
+      <p style="margin-bottom: 2rem;">Our team of certified fitness professionals is here to support you every step of the way.</p>
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-avatar">👨‍💼</div>
+          <h3>John Smith</h3>
+          <p class="team-role">Head Trainer</p>
+          <p class="team-bio">15+ years experience, NASM certified, specializes in strength training and athletic performance.</p>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">👩‍💼</div>
+          <h3>Maria Garcia</h3>
+          <p class="team-role">Yoga Instructor</p>
+          <p class="team-bio">RYT-500 certified, 10+ years teaching experience, expert in Vinyasa and restorative yoga.</p>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">👨‍💼</div>
+          <h3>David Lee</h3>
+          <p class="team-role">Nutrition Coach</p>
+          <p class="team-bio">Registered dietitian, helps members create sustainable nutrition plans for optimal results.</p>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">👩‍💼</div>
+          <h3>Lisa Anderson</h3>
+          <p class="team-role">HIIT Specialist</p>
+          <p class="team-bio">ACE certified, creates high-intensity workouts that maximize results in minimal time.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-section">
+      <h2>Why Choose <span>PowerFit</span></h2>
+      <div class="why-choose-grid">
+        <div class="why-item">
+          <h3>✓ Proven Track Record</h3>
+          <p>Over 10,000 successful transformations and counting</p>
+        </div>
+        <div class="why-item">
+          <h3>✓ Flexible Memberships</h3>
+          <p>Plans to fit every budget and fitness goal</p>
+        </div>
+        <div class="why-item">
+          <h3>✓ 24/7 Access</h3>
+          <p>Train on your schedule, whenever it's convenient</p>
+        </div>
+        <div class="why-item">
+          <h3>✓ Clean & Safe</h3>
+          <p>Immaculate facilities with strict hygiene protocols</p>
+        </div>
+        <div class="why-item">
+          <h3>✓ Community Support</h3>
+          <p>Join a welcoming community that celebrates your success</p>
+        </div>
+        <div class="why-item">
+          <h3>✓ Results Guaranteed</h3>
+          <p>Follow our programs and see real results in 30 days</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="container">
+    <h2>Ready to Join the <span>PowerFit Family?</span></h2>
+    <p>Start your fitness journey today with a free consultation.</p>
+    <a th:href="@{/join}" class="btn btn-large">Join Now</a>
+  </div>
+</section>
+
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>PowerFit Gym</h3>
+            <p>Transforming lives through fitness, one workout at a time.</p>
+            <div class="social-links">
+                <a href="#" aria-label="Facebook">📘</a>
+                <a href="#" aria-label="Instagram">📷</a>
+                <a href="#" aria-label="Twitter">🐦</a>
+                <a href="#" aria-label="YouTube">📺</a>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a th:href="@{/}">Home</a></li>
+                <li><a th:href="@{/about}">About Us</a></li>
+                <li><a th:href="@{/plans}">Membership Plans</a></li>
+                <li><a th:href="@{/contact}">Contact</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Contact Info</h4>
+            <ul>
+                <li>📍 123 Fitness Street, Health City</li>
+                <li>📞 +1 (555) 123-4567</li>
+                <li>📧 support@powerfitgym.com</li>
+                <li>🕐 Open 24/7</li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Membership</h4>
+            <ul>
+                <li><a th:href="@{/join}">Join Now</a></li>
+                <li><a th:href="@{/plans}">View Plans</a></li>
+                <li><a th:href="@{/contact}">FAQ</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2025 PowerFit Gym. All Rights Reserved. | <a href="#" style="color: rgba(255,255,255,0.7);">Privacy Policy</a> | <a href="#" style="color: rgba(255,255,255,0.7);">Terms of Service</a></p>
+    </div>
+</footer>
+
+</body>
+</html>

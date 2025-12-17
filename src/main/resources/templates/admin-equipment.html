@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipment Management | PowerFit Gym</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        .equipment-form {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.2);
+            margin-bottom: 2rem;
+        }
+        .equipment-table {
+            width: 100%;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            border-collapse: collapse;
+            overflow: hidden;
+        }
+        .equipment-table th {
+            background: rgba(230,57,70,0.3);
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 2px solid rgba(255,255,255,0.2);
+        }
+        .equipment-table td {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .status-available { color: #44ff44; font-weight: 600; }
+        .status-maintenance { color: #ffaa44; font-weight: 600; }
+        .status-out { color: #ff4444; font-weight: 600; }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <h1>PowerFit Gym - Admin</h1>
+    <div style="display: flex; align-items: center; gap: 2rem;">
+        <div style="display: flex; flex-direction: column; align-items: flex-end;">
+            <span style="color: rgba(255,255,255,0.9); font-size: 0.9rem;">Welcome, <strong style="color: var(--red);">Admin</strong></span>
+        </div>
+        <div>
+            <a th:href="@{/admin/dashboard}">Dashboard</a>
+            <a th:href="@{/admin/members}">Members</a>
+            <a th:href="@{/admin/equipment}">Equipment</a>
+            <a th:href="@{/logout}">Logout</a>
+        </div>
+    </div>
+</div>
+
+<section class="hero" style="min-height: 80vh;">
+    <h2>Equipment <span>Management</span></h2>
+
+    <div th:if="${success}" class="alert-message alert-success" th:text="${success}"></div>
+    <div th:if="${error}" class="alert-message alert-error" th:text="${error}"></div>
+
+    <!-- Add Equipment Form -->
+    <div class="equipment-form">
+        <h3 style="color: var(--red); margin-bottom: 1.5rem;">Add New Equipment</h3>
+        <form th:action="@{/admin/equipment/add}" method="post">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1rem;">
+                <div class="form-group">
+                    <label>Equipment Name *</label>
+                    <input type="text" name="name" placeholder="e.g., Treadmill" required>
+                </div>
+                <div class="form-group">
+                    <label>Category *</label>
+                    <select name="category" required>
+                        <option value="">Select Category</option>
+                        <option value="Cardio">Cardio</option>
+                        <option value="Strength">Strength Training</option>
+                        <option value="Free Weights">Free Weights</option>
+                        <option value="Machines">Machines</option>
+                        <option value="Accessories">Accessories</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Quantity *</label>
+                    <input type="number" name="quantity" min="0" placeholder="0" required>
+                </div>
+                <div class="form-group">
+                    <label>Status *</label>
+                    <select name="status" required>
+                        <option value="Available">Available</option>
+                        <option value="Maintenance">Maintenance</option>
+                        <option value="Out of Order">Out of Order</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                <textarea name="description" rows="2" placeholder="Equipment description (optional)"></textarea>
+            </div>
+            <button type="submit" class="btn">Add Equipment</button>
+        </form>
+    </div>
+
+    <!-- Equipment Statistics -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+        <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 10px; text-align: center;">
+            <h3 style="font-size: 2rem; color: var(--red);" th:text="${totalEquipment}">0</h3>
+            <p>Total Equipment</p>
+        </div>
+        <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 10px; text-align: center;">
+            <h3 style="font-size: 2rem; color: #4a90e2;" th:text="${equipmentCount}">0</h3>
+            <p>Equipment Types</p>
+        </div>
+    </div>
+
+    <!-- Equipment List -->
+    <div style="overflow-x: auto;">
+        <table class="equipment-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Quantity</th>
+                    <th>Status</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="equipment : ${equipmentList}">
+                    <td th:text="${equipment.id}"></td>
+                    <td th:text="${equipment.name}"></td>
+                    <td th:text="${equipment.category}"></td>
+                    <td th:text="${equipment.quantity}"></td>
+                    <td>
+                        <span th:if="${equipment.status == 'Available'}" class="status-available" th:text="${equipment.status}"></span>
+                        <span th:if="${equipment.status == 'Maintenance'}" class="status-maintenance" th:text="${equipment.status}"></span>
+                        <span th:if="${equipment.status == 'Out of Order'}" class="status-out" th:text="${equipment.status}"></span>
+                    </td>
+                    <td th:text="${equipment.description != null ? equipment.description : 'N/A'}"></td>
+                    <td>
+                        <form th:action="@{/admin/equipment/delete/{id}(id=${equipment.id})}" method="post" style="display: inline;"
+                              onsubmit="return confirm('Are you sure you want to delete this equipment?');">
+                            <button type="submit" class="btn btn-small btn-delete">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(equipmentList)}">
+                    <td colspan="7" style="text-align: center; padding: 2rem; color: rgba(255,255,255,0.7);">
+                        No equipment added yet. Add your first equipment above.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div style="margin-top: 2rem;">
+        <a th:href="@{/admin/dashboard}" class="btn" style="max-width: 200px;">Back to Dashboard</a>
+    </div>
+</section>
+
+<div class="footer">© 2025 PowerFit Gym | Admin Panel</div>
+
+</body>
+</html>
+
+

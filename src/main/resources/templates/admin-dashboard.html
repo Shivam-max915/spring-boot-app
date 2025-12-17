@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div class="navbar">
+    <h1>PowerFit Gym - Admin</h1>
+    <div style="display: flex; align-items: center; gap: 2rem;">
+        <div style="display: flex; flex-direction: column; align-items: flex-end;">
+            <span style="color: rgba(255,255,255,0.9); font-size: 0.9rem;">Welcome, <strong style="color: var(--red);">Admin</strong></span>
+            <span style="color: rgba(255,255,255,0.7); font-size: 0.85rem;" th:text="${#temporals.format(today, 'EEEE, MMMM dd, yyyy')}">Date</span>
+        </div>
+        <div>
+            <a th:href="@{/admin/members}">Members</a>
+            <a th:href="@{/logout}">Logout</a>
+        </div>
+    </div>
+</div>
+
+<section class="hero" style="min-height: 80vh;">
+    <h2>Admin <span>Dashboard</span></h2>
+    
+    <!-- Today's Date Display -->
+    <div style="background: rgba(230,57,70,0.2); backdrop-filter: blur(10px); padding: 1rem 2rem; border-radius: 10px; margin: 1.5rem auto; max-width: 600px; border: 1px solid rgba(230,57,70,0.3);">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+            <div>
+                <span style="color: rgba(255,255,255,0.8); font-size: 0.9rem;">Today's Date:</span>
+                <span style="color: var(--red); font-weight: 700; font-size: 1.1rem; margin-left: 0.5rem;" th:text="${#temporals.format(today, 'EEEE, MMMM dd, yyyy')}">Date</span>
+            </div>
+            <div>
+                <span style="color: rgba(255,255,255,0.8); font-size: 0.9rem;">Time:</span>
+                <span style="color: var(--red); font-weight: 700; font-size: 1.1rem; margin-left: 0.5rem;" id="currentTime">--:--:--</span>
+            </div>
+        </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; width: 100%; max-width: 1400px; margin-top: 2rem;">
+        <div style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 2rem; border-radius: 15px; border: 1px solid rgba(255,255,255,0.2); text-align: center; transition: transform 0.3s;" 
+             onmouseover="this.style.transform='translateY(-5px)'" 
+             onmouseout="this.style.transform='translateY(0)'">
+            <h3 style="font-size: 2.5rem; color: var(--red); margin-bottom: 0.5rem;" th:text="${totalMembers}">0</h3>
+            <p style="font-size: 1.1rem; color: rgba(255,255,255,0.9);">Total Members</p>
+        </div>
+
+        <div style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 2rem; border-radius: 15px; border: 1px solid rgba(255,255,255,0.2); text-align: center; transition: transform 0.3s;" 
+             onmouseover="this.style.transform='translateY(-5px)'" 
+             onmouseout="this.style.transform='translateY(0)'">
+            <h3 style="font-size: 2.5rem; color: #44ff44; margin-bottom: 0.5rem;" th:text="${activeMembers}">0</h3>
+            <p style="font-size: 1.1rem; color: rgba(255,255,255,0.9);">Active Members</p>
+        </div>
+
+        <div style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 2rem; border-radius: 15px; border: 1px solid rgba(255,255,255,0.2); text-align: center; transition: transform 0.3s;" 
+             onmouseover="this.style.transform='translateY(-5px)'" 
+             onmouseout="this.style.transform='translateY(0)'">
+            <h3 style="font-size: 2.5rem; color: #ffaa44; margin-bottom: 0.5rem;" th:text="${expiredMembers}">0</h3>
+            <p style="font-size: 1.1rem; color: rgba(255,255,255,0.9);">Inactive Members</p>
+        </div>
+
+        <div style="background: rgba(255,170,68,0.2); backdrop-filter: blur(10px); padding: 2rem; border-radius: 15px; border: 1px solid rgba(255,170,68,0.4); text-align: center; transition: transform 0.3s;" 
+             onmouseover="this.style.transform='translateY(-5px)'" 
+             onmouseout="this.style.transform='translateY(0)'">
+            <h3 style="font-size: 2.5rem; color: #ffaa44; margin-bottom: 0.5rem;" th:text="${expiringSoon}">0</h3>
+            <p style="font-size: 1.1rem; color: rgba(255,255,255,0.9);">Expiring Soon (7 days)</p>
+        </div>
+
+        <div style="background: rgba(74,144,226,0.2); backdrop-filter: blur(10px); padding: 2rem; border-radius: 15px; border: 1px solid rgba(74,144,226,0.4); text-align: center; transition: transform 0.3s;" 
+             onmouseover="this.style.transform='translateY(-5px)'" 
+             onmouseout="this.style.transform='translateY(0)'">
+            <h3 style="font-size: 2.5rem; color: #4a90e2; margin-bottom: 0.5rem;" th:text="${totalEquipment}">0</h3>
+            <p style="font-size: 1.1rem; color: rgba(255,255,255,0.9);">Total Equipment</p>
+            <p style="font-size: 0.9rem; color: rgba(255,255,255,0.7); margin-top: 0.5rem;" th:text="'(' + ${equipmentCount} + ' types)'">(0 types)</p>
+        </div>
+
+        <div style="background: rgba(68,255,68,0.2); backdrop-filter: blur(10px); padding: 2rem; border-radius: 15px; border: 1px solid rgba(68,255,68,0.4); text-align: center; transition: transform 0.3s;" 
+             onmouseover="this.style.transform='translateY(-5px)'" 
+             onmouseout="this.style.transform='translateY(0)'">
+            <h3 style="font-size: 2.5rem; color: #44ff44; margin-bottom: 0.5rem;" th:text="${paidMembers}">0</h3>
+            <p style="font-size: 1.1rem; color: rgba(255,255,255,0.9);">Paid Members</p>
+        </div>
+
+        <div style="background: rgba(255,68,68,0.2); backdrop-filter: blur(10px); padding: 2rem; border-radius: 15px; border: 1px solid rgba(255,68,68,0.4); text-align: center; transition: transform 0.3s;" 
+             onmouseover="this.style.transform='translateY(-5px)'" 
+             onmouseout="this.style.transform='translateY(0)'">
+            <h3 style="font-size: 2.5rem; color: #ff4444; margin-bottom: 0.5rem;" th:text="${pendingPayments}">0</h3>
+            <p style="font-size: 1.1rem; color: rgba(255,255,255,0.9);">Pending Payments</p>
+        </div>
+
+        <div style="background: rgba(255,215,0,0.2); backdrop-filter: blur(10px); padding: 2rem; border-radius: 15px; border: 1px solid rgba(255,215,0,0.4); text-align: center; transition: transform 0.3s;" 
+             onmouseover="this.style.transform='translateY(-5px)'" 
+             onmouseout="this.style.transform='translateY(0)'">
+            <h3 style="font-size: 2.5rem; color: #ffd700; margin-bottom: 0.5rem;" th:text="${totalPayments}">0</h3>
+            <p style="font-size: 1.1rem; color: rgba(255,255,255,0.9);">Total Payments</p>
+        </div>
+    </div>
+
+    <div style="margin-top: 3rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <a th:href="@{/admin/members}" class="btn" style="max-width: 250px;">View All Members</a>
+        <a th:href="@{/admin/members}" class="btn" style="max-width: 250px; background: linear-gradient(135deg, #ffaa44, #ff8800);">Manage Memberships</a>
+        <a th:href="@{/admin/equipment}" class="btn" style="max-width: 250px; background: linear-gradient(135deg, #4a90e2, #357abd);">Manage Equipment</a>
+    </div>
+
+    <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(255,255,255,0.05); border-radius: 10px; max-width: 800px; margin-left: auto; margin-right: auto;">
+        <h3 style="color: var(--red); margin-bottom: 1rem;">Quick Actions</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+            <div style="padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                <p style="font-weight: 600; margin-bottom: 0.5rem;">📊 Statistics</p>
+                <p style="font-size: 0.9rem; color: rgba(255,255,255,0.7);">View detailed member statistics and reports</p>
+            </div>
+            <div style="padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                <p style="font-weight: 600; margin-bottom: 0.5rem;">👥 Member Management</p>
+                <p style="font-size: 0.9rem; color: rgba(255,255,255,0.7);">Edit, activate, deactivate, or delete members</p>
+            </div>
+            <div style="padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                <p style="font-weight: 600; margin-bottom: 0.5rem;">🔄 Renewals</p>
+                <p style="font-size: 0.9rem; color: rgba(255,255,255,0.7);">Renew memberships and track expiry dates</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="footer">© 2025 PowerFit Gym | Admin Panel</div>
+
+<script>
+    // Update time every second
+    function updateTime() {
+        const now = new Date();
+        const timeString = now.toLocaleTimeString('en-US', { hour12: false });
+        document.getElementById('currentTime').textContent = timeString;
+    }
+    updateTime();
+    setInterval(updateTime, 1000);
+</script>
+
+</body>
+</html>

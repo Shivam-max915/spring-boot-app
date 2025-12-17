@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Choose the perfect membership plan for your fitness journey at PowerFit Gym.">
+  <title>Membership Plans | PowerFit Gym</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div class="navbar">
+  <h1>PowerFit Gym</h1>
+  <div>
+    <a th:href="@{/}">Home</a>
+    <a th:href="@{/about}">About</a>
+    <a th:href="@{/plans}">Plans</a>
+    <a th:href="@{/contact}">Contact</a>
+  </div>
+</div>
+
+<section class="hero" style="min-height:40vh">
+  <h2>Membership <span>Plans</span></h2>
+  <p style="max-width: 700px; margin: 0 auto;">Choose the perfect plan that fits your fitness goals and lifestyle. All plans include 24/7 access and full facility use.</p>
+</section>
+
+<section class="plans-section">
+  <div class="container">
+    <div class="plans-grid">
+      <!-- Monthly Plan -->
+      <div class="plan-card">
+        <div class="plan-header">
+          <h3>Monthly</h3>
+          <div class="plan-price">
+            <span class="price-amount">$50</span>
+            <span class="price-period">/month</span>
+          </div>
+        </div>
+        <div class="plan-features">
+          <ul>
+            <li>✓ 24/7 Gym Access</li>
+            <li>✓ All Equipment Included</li>
+            <li>✓ Locker Room Access</li>
+            <li>✓ Free WiFi</li>
+            <li>✓ Group Fitness Classes</li>
+            <li>✓ No Long-term Contract</li>
+          </ul>
+        </div>
+        <div class="plan-footer">
+          <a th:href="@{/join}" class="btn">Choose Monthly</a>
+          <p class="plan-note">Cancel anytime</p>
+        </div>
+      </div>
+
+      <!-- Quarterly Plan (Featured) -->
+      <div class="plan-card featured-plan">
+        <div class="plan-badge">Most Popular</div>
+        <div class="plan-header">
+          <h3>Quarterly</h3>
+          <div class="plan-price">
+            <span class="price-amount">$135</span>
+            <span class="price-period">/3 months</span>
+          </div>
+          <div class="plan-savings">Save $15</div>
+        </div>
+        <div class="plan-features">
+          <ul>
+            <li>✓ Everything in Monthly</li>
+            <li>✓ 1 Personal Training Session</li>
+            <li>✓ Nutrition Consultation</li>
+            <li>✓ Priority Class Booking</li>
+            <li>✓ Guest Pass (2 per month)</li>
+            <li>✓ Towel Service</li>
+          </ul>
+        </div>
+        <div class="plan-footer">
+          <a th:href="@{/join}" class="btn">Choose Quarterly</a>
+          <p class="plan-note">Best value</p>
+        </div>
+      </div>
+
+      <!-- Yearly Plan -->
+      <div class="plan-card">
+        <div class="plan-header">
+          <h3>Yearly</h3>
+          <div class="plan-price">
+            <span class="price-amount">$500</span>
+            <span class="price-period">/year</span>
+          </div>
+          <div class="plan-savings">Save $100</div>
+        </div>
+        <div class="plan-features">
+          <ul>
+            <li>✓ Everything in Quarterly</li>
+            <li>✓ 4 Personal Training Sessions</li>
+            <li>✓ Nutrition Consultation</li>
+            <li>✓ Body Composition Analysis</li>
+            <li>✓ Unlimited Guest Passes</li>
+            <li>✓ Premium Locker</li>
+            <li>✓ Free Supplements (Monthly)</li>
+          </ul>
+        </div>
+        <div class="plan-footer">
+          <a th:href="@{/join}" class="btn">Choose Yearly</a>
+          <p class="plan-note">Maximum savings</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Comparison Table -->
+    <div class="comparison-section">
+      <h2 class="section-title">Plan <span>Comparison</span></h2>
+      <div class="comparison-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Monthly</th>
+              <th>Quarterly</th>
+              <th>Yearly</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>24/7 Access</td>
+              <td>✓</td>
+              <td>✓</td>
+              <td>✓</td>
+            </tr>
+            <tr>
+              <td>All Equipment</td>
+              <td>✓</td>
+              <td>✓</td>
+              <td>✓</td>
+            </tr>
+            <tr>
+              <td>Group Classes</td>
+              <td>✓</td>
+              <td>✓</td>
+              <td>✓</td>
+            </tr>
+            <tr>
+              <td>Personal Training</td>
+              <td>-</td>
+              <td>1 Session</td>
+              <td>4 Sessions</td>
+            </tr>
+            <tr>
+              <td>Nutrition Consultation</td>
+              <td>-</td>
+              <td>✓</td>
+              <td>✓</td>
+            </tr>
+            <tr>
+              <td>Guest Passes</td>
+              <td>-</td>
+              <td>2/month</td>
+              <td>Unlimited</td>
+            </tr>
+            <tr>
+              <td>Towel Service</td>
+              <td>-</td>
+              <td>✓</td>
+              <td>✓</td>
+            </tr>
+            <tr>
+              <td>Premium Locker</td>
+              <td>-</td>
+              <td>-</td>
+              <td>✓</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="faq-section">
+      <h2 class="section-title">Frequently Asked <span>Questions</span></h2>
+      <div class="faq-grid">
+        <div class="faq-item">
+          <h3>Can I cancel anytime?</h3>
+          <p>Yes! All plans can be cancelled at any time with no penalties. Monthly plans require 30 days notice.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Do you offer student discounts?</h3>
+          <p>Yes! Students with valid ID receive 20% off all plans. Contact us for details.</p>
+        </div>
+        <div class="faq-item">
+          <h3>What payment methods do you accept?</h3>
+          <p>We accept all major credit cards, debit cards, and bank transfers. Auto-pay is available.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Is there a joining fee?</h3>
+          <p>No joining fees! We believe in making fitness accessible to everyone.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Can I freeze my membership?</h3>
+          <p>Yes, you can freeze your membership for up to 3 months per year for medical or travel reasons.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Do you offer corporate memberships?</h3>
+          <p>Yes! We offer special rates for companies with 10+ employees. Contact us for a custom quote.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="container">
+    <h2>Ready to Get <span>Started?</span></h2>
+    <p>Join PowerFit Gym today and start your fitness journey!</p>
+    <a th:href="@{/join}" class="btn btn-large">Join Now</a>
+  </div>
+</section>
+
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>PowerFit Gym</h3>
+            <p>Transforming lives through fitness, one workout at a time.</p>
+            <div class="social-links">
+                <a href="#" aria-label="Facebook">📘</a>
+                <a href="#" aria-label="Instagram">📷</a>
+                <a href="#" aria-label="Twitter">🐦</a>
+                <a href="#" aria-label="YouTube">📺</a>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a th:href="@{/}">Home</a></li>
+                <li><a th:href="@{/about}">About Us</a></li>
+                <li><a th:href="@{/plans}">Membership Plans</a></li>
+                <li><a th:href="@{/contact}">Contact</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Contact Info</h4>
+            <ul>
+                <li>📍 123 Fitness Street, Health City</li>
+                <li>📞 +1 (555) 123-4567</li>
+                <li>📧 support@powerfitgym.com</li>
+                <li>🕐 Open 24/7</li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Membership</h4>
+            <ul>
+                <li><a th:href="@{/join}">Join Now</a></li>
+                <li><a th:href="@{/plans}">View Plans</a></li>
+                <li><a th:href="@{/contact}">FAQ</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2025 PowerFit Gym. All Rights Reserved. | <a href="#" style="color: rgba(255,255,255,0.7);">Privacy Policy</a> | <a href="#" style="color: rgba(255,255,255,0.7);">Terms of Service</a></p>
+    </div>
+</footer>
+
+</body>
+</html>

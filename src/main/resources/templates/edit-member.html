@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Member</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        .form-container {
+            max-width: 600px;
+            margin: 2rem auto;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: rgba(255,255,255,0.9);
+            font-weight: 600;
+        }
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            margin: 0;
+        }
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        .btn-secondary {
+            background: rgba(255,255,255,0.2);
+        }
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.3);
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <h1>PowerFit Gym - Admin</h1>
+    <div style="display: flex; align-items: center; gap: 2rem;">
+        <div style="display: flex; flex-direction: column; align-items: flex-end;">
+            <span style="color: rgba(255,255,255,0.9); font-size: 0.9rem;">Welcome, <strong style="color: var(--red);">Admin</strong></span>
+            <span style="color: rgba(255,255,255,0.7); font-size: 0.85rem;" th:text="${#temporals.format(today, 'EEEE, MMMM dd, yyyy')}">Date</span>
+        </div>
+        <div>
+            <a th:href="@{/admin/dashboard}">Dashboard</a>
+            <a th:href="@{/admin/members}">Members</a>
+            <a th:href="@{/logout}">Logout</a>
+        </div>
+    </div>
+</div>
+
+<section class="hero" style="min-height: 80vh;">
+    <h2>Edit <span>Member</span></h2>
+
+    <div class="form-container">
+        <form th:action="@{/admin/members/update}" th:object="${member}" method="post">
+            <input type="hidden" th:field="*{id}">
+            
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" th:field="*{name}" placeholder="Full Name" required>
+            </div>
+
+            <div class="form-group">
+                <label>Phone Number</label>
+                <input type="tel" th:field="*{phone}" placeholder="Phone Number" required pattern="[0-9]{10,15}">
+            </div>
+
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" th:field="*{email}" placeholder="Email Address" required>
+            </div>
+
+            <div class="form-group">
+                <label>Membership Plan</label>
+                <select th:field="*{plan}" required>
+                    <option value="">Select Membership Plan</option>
+                    <option value="Monthly">Monthly - $50/month</option>
+                    <option value="Quarterly">Quarterly - $135/3 months</option>
+                    <option value="Yearly">Yearly - $500/year</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Gym Batch</label>
+                <select th:field="*{batch}">
+                    <option value="">Select Batch</option>
+                    <option value="Morning (6AM-10AM)">Morning (6AM-10AM)</option>
+                    <option value="Afternoon (10AM-2PM)">Afternoon (10AM-2PM)</option>
+                    <option value="Evening (2PM-6PM)">Evening (2PM-6PM)</option>
+                    <option value="Night (6PM-10PM)">Night (6PM-10PM)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Payment Status</label>
+                <select th:field="*{paymentStatus}">
+                    <option value="Pending">Pending</option>
+                    <option value="Paid">Paid</option>
+                    <option value="Overdue">Overdue</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <div class="checkbox-group">
+                    <input type="checkbox" th:field="*{active}" id="active">
+                    <label for="active" style="margin: 0; cursor: pointer;">Active Membership</label>
+                </div>
+            </div>
+
+            <div class="form-group" th:if="${member.joinDate != null}">
+                <label>Join Date</label>
+                <input type="text" th:value="${#temporals.format(member.joinDate, 'MMM dd, yyyy')}" disabled 
+                       style="background: rgba(255,255,255,0.05); opacity: 0.7;">
+            </div>
+
+            <div class="form-group" th:if="${member.expiryDate != null}">
+                <label>Expiry Date</label>
+                <input type="text" th:value="${#temporals.format(member.expiryDate, 'MMM dd, yyyy')}" disabled 
+                       style="background: rgba(255,255,255,0.05); opacity: 0.7;">
+            </div>
+
+            <div class="btn-group">
+                <button type="submit" class="btn">Update Member</button>
+                <a th:href="@{/admin/members}" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</section>
+
+<div class="footer">© 2025 PowerFit Gym | Admin Panel</div>
+
+</body>
+</html>
+

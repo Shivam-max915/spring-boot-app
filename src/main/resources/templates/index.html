@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PowerFit Gym - Transform your body and mind with state-of-the-art equipment and expert trainers. Join today!">
+    <title>PowerFit Gym - Transform Your Body, Transform Your Life</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div class="navbar">
+    <h1>PowerFit Gym</h1>
+    <div>
+        <a th:href="@{/}">Home</a>
+        <a th:href="@{/about}">About</a>
+        <a th:href="@{/plans}">Plans</a>
+        <a th:href="@{/contact}">Contact</a>
+    </div>
+</div>
+
+<!-- Hero Section -->
+<section class="hero">
+    <h2>Transform Your Body<br><span>Transform Your Life</span></h2>
+    <p>Join thousands of members achieving their fitness goals with state-of-the-art equipment, expert trainers, and proven programs.</p>
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 2rem;">
+        <a th:href="@{/join}" class="btn">Start Your Journey</a>
+        <a th:href="@{/plans}" class="btn" style="background: rgba(255,255,255,0.2);">View Plans</a>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="features-section">
+    <div class="container">
+        <h2 class="section-title">Why Choose <span>PowerFit</span></h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🏋️</div>
+                <h3>Premium Equipment</h3>
+                <p>State-of-the-art fitness equipment from leading brands including Life Fitness, Technogym, and Hammer Strength.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">👨‍🏫</div>
+                <h3>Expert Trainers</h3>
+                <p>Certified personal trainers with years of experience to guide you through every step of your fitness journey.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💪</div>
+                <h3>Proven Results</h3>
+                <p>Join thousands of members who have achieved their fitness goals with our comprehensive training programs.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🕐</div>
+                <h3>24/7 Access</h3>
+                <p>Train anytime that fits your schedule. Our facility is open 24/7 for your convenience.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🏆</div>
+                <h3>Group Classes</h3>
+                <p>Join our exciting group fitness classes including yoga, HIIT, spinning, and strength training.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💚</div>
+                <h3>Community Support</h3>
+                <p>Be part of a supportive community that motivates and inspires you to reach your full potential.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats-section">
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3 class="stat-number">10,000+</h3>
+                <p class="stat-label">Active Members</p>
+            </div>
+            <div class="stat-card">
+                <h3 class="stat-number">15+</h3>
+                <p class="stat-label">Years Experience</p>
+            </div>
+            <div class="stat-card">
+                <h3 class="stat-number">50+</h3>
+                <p class="stat-label">Expert Trainers</p>
+            </div>
+            <div class="stat-card">
+                <h3 class="stat-number">100+</h3>
+                <p class="stat-label">Classes Weekly</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials-section">
+    <div class="container">
+        <h2 class="section-title">What Our <span>Members Say</span></h2>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"PowerFit Gym changed my life! The trainers are amazing and the equipment is top-notch. I've lost 30 pounds in 3 months!"</p>
+                <div class="testimonial-author">
+                    <strong>Sarah Johnson</strong>
+                    <span>Member since 2023</span>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"Best gym I've ever been to. The community is supportive, and the facilities are always clean and well-maintained."</p>
+                <div class="testimonial-author">
+                    <strong>Mike Chen</strong>
+                    <span>Member since 2022</span>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"The personal training sessions are incredible. My trainer helped me achieve goals I never thought possible!"</p>
+                <div class="testimonial-author">
+                    <strong>Emily Rodriguez</strong>
+                    <span>Member since 2024</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+    <div class="container">
+        <h2>Ready to Start Your <span>Fitness Journey?</span></h2>
+        <p>Join PowerFit Gym today and take the first step towards a healthier, stronger you.</p>
+        <a th:href="@{/join}" class="btn btn-large">Join Now - It's Free to Start</a>
+        <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">No commitment required. Cancel anytime.</p>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>PowerFit Gym</h3>
+            <p>Transforming lives through fitness, one workout at a time.</p>
+            <div class="social-links">
+                <a href="#" aria-label="Facebook">📘</a>
+                <a href="#" aria-label="Instagram">📷</a>
+                <a href="#" aria-label="Twitter">🐦</a>
+                <a href="#" aria-label="YouTube">📺</a>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a th:href="@{/}">Home</a></li>
+                <li><a th:href="@{/about}">About Us</a></li>
+                <li><a th:href="@{/plans}">Membership Plans</a></li>
+                <li><a th:href="@{/contact}">Contact</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Contact Info</h4>
+            <ul>
+                <li>📍 123 Fitness Street, Health City</li>
+                <li>📞 +1 (555) 123-4567</li>
+                <li>📧 support@powerfitgym.com</li>
+                <li>🕐 Open 24/7</li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Membership</h4>
+            <ul>
+                <li><a th:href="@{/join}">Join Now</a></li>
+                <li><a th:href="@{/plans}">View Plans</a></li>
+                <li><a th:href="@{/contact}">FAQ</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2025 PowerFit Gym. All Rights Reserved. | <a href="#" style="color: rgba(255,255,255,0.7);">Privacy Policy</a> | <a href="#" style="color: rgba(255,255,255,0.7);">Terms of Service</a></p>
+    </div>
+</footer>
+
+</body>
+</html>

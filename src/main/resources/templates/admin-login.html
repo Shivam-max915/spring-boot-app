@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<section class="hero">
+    <h2>Admin <span>Login</span></h2>
+
+    <div th:if="${param.error}" style="color: #ff4444; margin-bottom: 1rem; padding: 0.75rem; background: rgba(255,68,68,0.1); border-radius: 8px; border: 1px solid rgba(255,68,68,0.3);">
+        Invalid username or password. Please try again.
+    </div>
+
+    <div th:if="${param.logout}" style="color: #44ff44; margin-bottom: 1rem; padding: 0.75rem; background: rgba(68,255,68,0.1); border-radius: 8px; border: 1px solid rgba(68,255,68,0.3);">
+        You have been successfully logged out.
+    </div>
+
+    <form th:action="@{/admin/login/process}" method="post">
+        <input type="text" name="username" placeholder="Username" required autofocus>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit" class="btn">Login</button>
+    </form>
+
+    <p style="margin-top: 1.5rem; font-size: 0.9rem; color: rgba(255,255,255,0.7);">
+        Default: admin / admin123
+    </p>
+</section>
+
+</body>
+</html>
